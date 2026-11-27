@@ -72,6 +72,16 @@
   --gap:24px;
   --sec:clamp(64px,9vw,140px);
   --expo:cubic-bezier(.16,1,.3,1);
+  --btn-h:52px;
+  --btn-h-sm:40px;
+  --btn-pad:0 28px;
+  --btn-r:2px;
+  --btn-bg:#8F4A2E;
+  --btn-bg-h:#7A3E26;
+  --btn-fg:#FAF8F4;
+  --btn-ink:#191512;
+  --btn-line:#D9D2C6;
+  --ease-btn:cubic-bezier(.22,.61,.36,1);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -105,41 +115,57 @@ section[id]{scroll-margin-top:84px}
   width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:2px;
   background:var(--terra);color:var(--paper);font-family:"Prata",Georgia,serif;font-size:22px;line-height:1;
 }
-.brand__name{font-family:"Prata",Georgia,serif;font-size:16px;line-height:1.15;letter-spacing:-.01em;white-space:nowrap}
+.brand__name{display:block;font-family:"Prata",Georgia,serif;font-size:16px;line-height:1.15;letter-spacing:-.01em;white-space:nowrap}
 .brand__sub{display:block;font-family:"Golos Text",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
 .nav{display:flex;gap:26px;margin-left:auto}
 .nav a{font-size:14px;line-height:1.4;padding:6px 0;border-bottom:1px solid transparent}
 .nav a:hover{color:var(--terra);border-color:var(--terra)}
 .hdr__side{display:flex;align-items:center;gap:20px}
-.tel{font-size:14px;white-space:nowrap}
+.tel{font-size:13px;white-space:nowrap}
 .tel:hover{color:var(--terra)}
-.hdr__call{display:none;width:44px;height:44px;align-items:center;justify-content:center}
-.hdr__call svg{width:21px;height:21px}
 @media (max-width:980px){
   .hdr__in{height:64px;gap:16px}
   .nav,.tel{display:none}
   .hdr__side{margin-left:auto}
   .brand__name{font-size:15px}
   .brand__sub{display:none}
-  .hdr__call{display:flex}
+}
+@media (max-width:767px){
+  .btn.btn--sm{height:44px}
 }
 @media (max-width:600px){
   .brand__name{font-size:14px;white-space:normal;line-height:1.15;max-width:150px}
-  .hdr__side .btn--sm{padding:0 14px}
-  .hdr__call{display:none}
 }
 
 /* shared */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;
-  background:var(--terra);color:var(--paper);border:1px solid var(--terra);border-radius:2px;
-  font-size:15px;line-height:1;cursor:pointer;
-  transition:background .2s ease,border-color .2s ease,color .2s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  height:var(--btn-h);padding:var(--btn-pad);border:1px solid transparent;border-radius:var(--btn-r);
+  background:transparent;color:inherit;font-family:inherit;font-size:14px;font-weight:500;line-height:1;
+  letter-spacing:.01em;text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background-color .24s var(--ease-btn),color .24s var(--ease-btn),
+              border-color .24s var(--ease-btn),transform .12s var(--ease-btn);
 }
-.btn:hover{background:var(--terra-dark);border-color:var(--terra-dark)}
-.btn--ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn--ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.btn--sm{height:40px;padding:0 18px;font-size:14px}
+.btn:active{transform:scale(.985)}
+.btn:focus-visible{outline:2px solid rgba(143,74,46,.55);outline-offset:3px}
+.btn svg{width:16px;height:16px;flex:none}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.btn--primary{background:var(--btn-bg);color:var(--btn-fg);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.btn--primary:hover{background:var(--btn-bg-h)}
+.btn--outline{border-color:var(--btn-ink);color:var(--btn-ink);background:transparent}
+.btn--outline:hover{background:var(--btn-ink);color:var(--btn-fg);border-color:var(--btn-ink)}
+.btn--light{background:var(--btn-fg);color:var(--btn-ink);border-color:var(--btn-fg)}
+.btn--light:hover{background:#fff;border-color:#fff}
+.btn--ghost{border-color:rgba(250,248,244,.32);color:var(--btn-fg);background:transparent}
+.btn--ghost:hover{background:rgba(250,248,244,.08);border-color:rgba(250,248,244,.6)}
+.btn--sm{height:var(--btn-h-sm);padding:0 18px;font-size:13px}
+.btn--wide{width:100%}
+.btn--round{width:44px;height:44px;padding:0;border-radius:50%}
+.link-cta{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;line-height:1.5;color:var(--terra);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px;white-space:nowrap;transition:color .2s var(--ease-btn)}
+.link-cta span{display:inline-block;font-size:14px;transition:transform .2s var(--ease-btn)}
+.link-cta:hover{color:var(--btn-ink)}
+.link-cta:hover span{transform:translateX(4px)}
+.link-cta:focus-visible{outline:2px solid rgba(143,74,46,.55);outline-offset:3px}
 .sec{padding:var(--sec) 0}
 .sec-head{display:grid;grid-template-columns:7fr 5fr;gap:var(--gap);align-items:end;margin-bottom:clamp(28px,4vw,52px)}
 .sec-head h2{font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.02em;max-width:18ch}
@@ -164,14 +190,7 @@ section[id]{scroll-margin-top:84px}
   margin:0;text-wrap:pretty;
 }
 .hero__lead{font-size:18px;line-height:1.55;max-width:34ch;color:#5F574D;margin-top:28px;text-wrap:pretty}
-.hero__cta{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:32px}
-.hero__cta .btn{height:52px;padding:0 28px;font-size:14px;font-weight:500;border-radius:2px;box-shadow:none}
-.hero__cta .btn:hover{background:#7C3F27;border-color:#7C3F27}
-.hero__tel{
-  display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1;color:var(--ink);
-  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;
-}
-.hero__tel:hover{color:var(--terra)}
+.hero__cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:32px}
 .hero__note{font-size:13px;line-height:1.5;color:#6B6257;margin-top:16px}
 .hero__fig{grid-column:8/13;position:relative;margin:0;min-height:0;box-shadow:24px 24px 0 0 #EDE6DA}
 .hero__fig img{
@@ -189,9 +208,8 @@ section[id]{scroll-margin-top:84px}
   .hero__text{display:block}
   .hero h1{font-size:clamp(40px,9vw,56px)}
   .hero__lead{max-width:44ch}
-  .hero__cta{display:block;margin-top:28px}
+  .hero__cta{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:28px}
   .hero__cta .btn{width:100%}
-  .hero__tel{margin-top:14px}
   .hero__fig{aspect-ratio:3/2;margin:32px calc(var(--pad) * -1) 0;box-shadow:none}
   .hero__facts{margin-top:0;padding:18px 0}
   .hero__facts .wrap{display:block;font-size:13px;line-height:1.6;letter-spacing:0;text-transform:none}
@@ -221,9 +239,7 @@ section[id]{scroll-margin-top:84px}
 .master__quote{margin:24px 0 0;padding:0 0 0 20px;border-left:2px solid var(--terra);font-family:"Prata",Georgia,serif;font-style:italic;font-size:22px;line-height:1.4;color:#2B2521;max-width:32ch}
 .master__docs{display:flex;gap:12px;margin-top:24px}
 .master__docs img{width:88px;height:88px;object-fit:cover;border:1px solid var(--line)}
-.master__link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:auto;padding-top:24px;font-size:14px;line-height:1.5;color:var(--terra);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
-.master__link span{transition:transform .2s var(--expo)}
-.master__link:hover span{transform:translateX(4px)}
+.master__cta{margin:auto 0 0;padding-top:24px}
 @media (max-width:1023px){
   #master{padding:clamp(64px,8vw,80px) 0}
   .master{display:flex;flex-direction:column;gap:0}
@@ -239,7 +255,7 @@ section[id]{scroll-margin-top:84px}
   .master__dot{display:none}
   .master__quote{order:7}
   .master__docs{order:8}
-  .master__link{order:9;align-self:flex-start;margin-top:24px;padding-top:0}
+  .master__cta{order:9;align-self:flex-start;margin-top:24px;padding-top:0}
 }
 
 /* services */
@@ -290,7 +306,7 @@ section[id]{scroll-margin-top:84px}
 .find__grid{display:grid;grid-template-columns:6fr 6fr;gap:var(--gap);align-items:start}
 .find__addr .big{font-family:"Prata",Georgia,serif;font-size:22px;line-height:1.3}
 .find__addr p{font-size:15px;line-height:1.6;color:var(--muted);margin-top:8px;max-width:38ch}
-.find__btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.find__btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
 .find__dl{margin:28px 0 0;display:grid;gap:16px}
 .find__dl dt{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .find__dl dd{margin:4px 0 0;font-size:15px;line-height:1.6}
@@ -342,7 +358,7 @@ section[id]{scroll-margin-top:84px}
 .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;margin:16px 0 4px;color:var(--muted)}
 .consent input{width:18px;height:18px;margin:1px 0 0;flex:none;accent-color:var(--terra)}
 .consent a{border-bottom:1px solid var(--field)}
-.form .btn{width:100%;margin-top:14px}
+.form > .btn{margin-top:14px}
 .form__note{font-size:12px;line-height:1.5;color:var(--muted);margin-top:12px}
 .form__result{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
 .form__done{font-size:15px;line-height:1.5;margin-bottom:12px}
@@ -354,8 +370,6 @@ section[id]{scroll-margin-top:84px}
 .strip{background:var(--terra);color:var(--paper);padding:clamp(44px,6vw,72px) 0}
 .strip__in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .strip h2{font-size:clamp(26px,3.4vw,40px);line-height:1.1;letter-spacing:-.02em;max-width:22ch}
-.strip .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.strip .btn:hover{background:transparent;color:var(--paper);border-color:var(--paper)}
 
 /* faq */
 .faq{border-top:1px solid var(--ink)}
@@ -389,13 +403,14 @@ section[id]{scroll-margin-top:84px}
 .cta-bar{display:none}
 @media (max-width:980px){
   .cta-bar{
-    display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:70;
-    background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
+    display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:var(--paper);border-top:1px solid var(--line);
+    padding:8px 12px calc(8px + env(safe-area-inset-bottom));
   }
-  .cta-bar a{display:flex;align-items:center;justify-content:center;min-height:56px;font-size:15px}
-  .cta-bar a:last-child{background:var(--terra);color:var(--paper)}
-  body{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
-  .strip .btn{margin-bottom:8px}
+  .cta-bar .btn{height:52px}
+  .cta-bar__call{width:52px;padding:0}
+  .cta-bar__book{width:100%}
+  body{padding-bottom:calc(69px + env(safe-area-inset-bottom))}
 }
 
 /* lightbox */
@@ -405,19 +420,15 @@ section[id]{scroll-margin-top:84px}
 .lb__img{max-width:100%;max-height:78vh;object-fit:contain}
 .lb__cap{font-size:14px;line-height:1.5;text-align:center;color:#D8D2C7}
 .lb__count{font-size:12px;color:#A69E92}
-.lb__btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:0;border-radius:50%;background:rgba(250,248,244,.12);color:var(--paper);cursor:pointer;display:grid;place-items:center}
-.lb__btn:hover{background:rgba(250,248,244,.24)}
-.lb__btn svg{width:22px;height:22px}
-.lb__close{top:8px;right:8px;transform:none}
-.lb__prev{left:8px}
-.lb__next{right:8px}
+.lb__btn{position:absolute;z-index:2}
+.lb__close{top:8px;right:8px}
+.lb__prev{left:8px;top:calc(50% - 22px)}
+.lb__next{right:8px;top:calc(50% - 22px)}
 
 /* ---------- motion ---------- */
 .hdr{transition:transform .26s var(--expo),border-color .25s ease}
 .hdr.is-hidden{transform:translateY(-100%)}
 .hdr__progress{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--terra);transform:scaleX(0);transform-origin:0 50%}
-.btn{transition:background .2s ease,border-color .2s ease,color .2s ease,transform .12s var(--expo)}
-.btn:active{transform:scale(.985)}
 
 /* первый экран */
 .js .hero h1 .line{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
@@ -447,8 +458,7 @@ section[id]{scroll-margin-top:84px}
 .js section.is-in h2 .line>span{transform:none}
 
 /* прайс */
-.price__row{grid-template-columns:1fr auto 44px}
-.price__arrow{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;font-size:18px;line-height:1;color:#9A9388;text-decoration:none;transition:color .22s var(--expo),transform .22s var(--expo)}
+.price__row{grid-template-columns:1fr auto auto}
 @media (hover:hover) and (pointer:fine){
   .price__row{position:relative}
   .price__row::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--terra);transform:scaleX(0);transform-origin:0 50%;transition:transform .42s var(--expo)}
@@ -457,12 +467,8 @@ section[id]{scroll-margin-top:84px}
   .price__row:hover h3,.price__row:hover p{transform:translateY(-6px)}
   .price__row .chips{transition:transform .26s var(--expo)}
   .price__row:hover .chips{transform:translateY(-2px)}
-  .price__row:hover .price__arrow{transform:translateX(6px);color:var(--terra)}
 }
-@media (max-width:700px){.price__row{grid-template-columns:1fr}.price__arrow{display:none}}
-
-/* магнитная кнопка */
-.hero__cta .btn__label{display:inline-block;transition:transform .25s var(--expo)}
+@media (max-width:700px){.price__row{grid-template-columns:1fr}.price__row .link-cta{justify-self:start}}
 
 /* курсор-метка */
 .cursor-label{position:fixed;left:0;top:0;width:88px;height:88px;margin:-44px 0 0 -44px;pointer-events:none;z-index:80;display:grid;place-items:center}
@@ -488,8 +494,6 @@ section[id]{scroll-margin-top:84px}
 .faq summary::after{transition:transform .26s var(--expo)}
 .field label{transition:transform .18s var(--expo),color .18s}
 .field:focus-within label{transform:translateY(-2px);color:var(--terra)}
-.hero__tel{text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:0 1px;background-position:0 calc(100% - 10px);transition:background-size .22s var(--expo),color .18s}
-.hero__tel:hover{background-size:100% 1px}
 
 /* мобильные: без масок и clip-path */
 @media (max-width:1023px){
@@ -534,10 +538,7 @@ section[id]{scroll-margin-top:84px}
     </nav>
     <div class="hdr__side">
       <a class="tel" href="tel:+79243310950">+7 924 331-09-50</a>
-      <a class="btn btn--sm" href="#booking">Записаться</a>
-      <a class="hdr__call" href="tel:+79243310950" aria-label="Позвонить в студию">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6.6 3.5 9 8l-1.9 2a15 15 0 0 0 6.9 6.9l2-1.9 4.5 2.4a1.6 1.6 0 0 1 .8 1.7l-.4 2.1a1.6 1.6 0 0 1-1.7 1.3C10.6 22 2 13.4 1.5 4.8a1.6 1.6 0 0 1 1.3-1.7l2.1-.4a1.6 1.6 0 0 1 1.7.8Z"/></svg>
-      </a>
+      <a class="btn btn--primary btn--sm" href="#booking">Записаться</a>
     </div>
   </div>
   <span class="hdr__progress" id="hdrProgress" aria-hidden="true"></span>
@@ -551,8 +552,8 @@ section[id]{scroll-margin-top:84px}
         <h1 id="hero-title"><span class="line"><span>Массаж, после</span></span> <span class="line"><span>которого тело</span></span> <span class="line"><span>выдыхает</span></span></h1>
         <p class="hero__lead">Кирова, 25а. Один гость за раз: час тишины и работа с вашим телом. Ежедневно 10:00–20:00, по записи.</p>
         <div class="hero__cta">
-          <a class="btn" href="#booking"><span class="btn__label">Записаться</span></a>
-          <a class="hero__tel" href="tel:+79243310950">Позвонить →</a>
+          <a class="btn btn--primary" href="#booking">Записаться</a>
+          <a class="btn btn--outline" href="tel:+79243310950">Позвонить</a>
         </div>
         <p class="hero__note">Отвечу в течение дня.</p>
       </div>
@@ -605,7 +606,7 @@ section[id]{scroll-margin-top:84px}
         <!-- TODO: при наличии сканов — 3 миниатюры документов 88×88 с рамкой #E2DCD2 и alt.
              <div class="master__docs">…</div>
         -->
-        <a class="master__link" href="#booking">Записаться на сеанс <span aria-hidden="true">→</span></a>
+        <p class="master__cta"><a class="link-cta" href="#booking">Записаться на сеанс <span aria-hidden="true">→</span></a></p>
       </div>
     </div>
   </section>
@@ -620,7 +621,7 @@ section[id]{scroll-margin-top:84px}
         <noscript><p class="price__note">Список услуг и стоимость — по телефону <a href="tel:+79243310950">+7 924 331-09-50</a>.</p></noscript>
       </div>
       <p class="price__note">Длительность выбираете при записи. Если не знаете, что нужно, — напишите: разберёмся вместе.</p>
-      <div class="price__cta"><a class="btn" href="#booking">Записаться</a></div>
+      <div class="price__cta"><a class="btn btn--primary" href="#booking">Записаться</a></div>
     </div>
   </section>
 
@@ -704,8 +705,8 @@ section[id]{scroll-margin-top:84px}
           <p class="big">Владивосток,<br>ул. Кирова, 25а</p>
           <p>Ниже уровня улицы. Звонок на двери — открою.</p>
           <div class="find__btns">
-            <a class="btn btn--sm" href="https://2gis.ru/vladivostok/firm/70000001116574113" target="_blank" rel="noopener">Открыть в 2ГИС</a>
-            <a class="btn btn--sm btn--ghost" href="tel:+79243310950">Позвонить</a>
+            <a class="link-cta" href="https://2gis.ru/vladivostok/firm/70000001116574113" target="_blank" rel="noopener">Открыть в 2ГИС <span aria-hidden="true">→</span></a>
+            <a class="btn btn--outline btn--sm" href="tel:+79243310950">Позвонить</a>
           </div>
           <dl class="find__dl">
             <div>
@@ -831,12 +832,12 @@ section[id]{scroll-margin-top:84px}
           </div>
           <p class="err" id="e-consent"></p>
 
-          <button class="btn" type="submit">Отправить в Telegram</button>
+          <button class="btn btn--primary btn--wide" type="submit">Отправить в Telegram</button>
           <p class="form__note">Кнопка откроет Telegram с готовым сообщением — останется нажать «Отправить».</p>
 
           <div class="form__result" id="formResult" hidden aria-live="polite">
             <p class="form__done">Сообщение готово. Если Telegram не открылся — воспользуйтесь ссылкой ниже.</p>
-            <a class="btn" id="tgLink" href="https://t.me/garmonia_dushi_i_tela1" target="_blank" rel="noopener">Открыть Telegram</a>
+            <a class="btn btn--outline btn--wide" id="tgLink" href="https://t.me/garmonia_dushi_i_tela1" target="_blank" rel="noopener">Открыть Telegram</a>
             <p class="form__alt">Или позвоните: <a href="tel:+79243310950">+7 924 331-09-50</a>.</p>
           </div>
         </form>
@@ -847,7 +848,7 @@ section[id]{scroll-margin-top:84px}
   <section class="strip" aria-labelledby="strip-title">
     <div class="wrap strip__in">
       <h2 id="strip-title">Свободное время — по записи</h2>
-      <a class="btn" href="#booking">Записаться</a>
+      <a class="btn btn--light" href="#booking">Записаться</a>
     </div>
   </section>
 </main>
@@ -891,24 +892,26 @@ section[id]{scroll-margin-top:84px}
 </footer>
 
 <div class="cta-bar">
-  <a href="tel:+79243310950">Позвонить</a>
-  <a href="#booking">Записаться</a>
+  <a class="btn btn--outline cta-bar__call" href="tel:+79243310950" aria-label="Позвонить">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6.6 3.5 9 8l-1.9 2a15 15 0 0 0 6.9 6.9l2-1.9 4.5 2.4a1.6 1.6 0 0 1 .8 1.7l-.4 2.1a1.6 1.6 0 0 1-1.7 1.3C10.6 22 2 13.4 1.5 4.8a1.6 1.6 0 0 1 1.3-1.7l2.1-.4a1.6 1.6 0 0 1 1.7.8Z"/></svg>
+  </a>
+  <a class="btn btn--primary btn--wide cta-bar__book" href="#booking">Записаться</a>
 </div>
 
 <dialog class="lb" id="lb" aria-label="Фотографии кабинета">
-  <button class="lb__btn lb__close" id="lbClose" type="button" aria-label="Закрыть просмотр">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  <button class="btn btn--ghost btn--round lb__btn lb__close" id="lbClose" type="button" aria-label="Закрыть просмотр">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
   </button>
-  <button class="lb__btn lb__prev" id="lbPrev" type="button" aria-label="Предыдущее фото">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+  <button class="btn btn--ghost btn--round lb__btn lb__prev" id="lbPrev" type="button" aria-label="Предыдущее фото">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
   </button>
   <figure class="lb__fig">
     <img class="lb__img" id="lbImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
     <figcaption class="lb__cap" id="lbCap"></figcaption>
     <p class="lb__count" id="lbCount" aria-live="polite"></p>
   </figure>
-  <button class="lb__btn lb__next" id="lbNext" type="button" aria-label="Следующее фото">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+  <button class="btn btn--ghost btn--round lb__btn lb__next" id="lbNext" type="button" aria-label="Следующее фото">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
   </button>
 </dialog>
 
@@ -960,25 +963,6 @@ section[id]{scroll-margin-top:84px}
     document.fonts.ready.then(function () { window.setTimeout(heroIn, 60); });
   }
   window.requestAnimationFrame(function () { window.requestAnimationFrame(heroIn); });
-
-  /* магнитная подпись */
-  if (hoverFine && !reduce) {
-    var mag = document.querySelector(".hero__cta .btn");
-    var magLabel = mag ? mag.querySelector(".btn__label") : null;
-    var heroSec = document.querySelector(".hero");
-    if (mag && magLabel && heroSec) {
-      var magPad = 56;
-      heroSec.addEventListener("mousemove", function (e) {
-        var r = mag.getBoundingClientRect();
-        var inside = e.clientX > r.left - magPad && e.clientX < r.right + magPad && e.clientY > r.top - magPad && e.clientY < r.bottom + magPad;
-        if (!inside) { magLabel.style.transform = ""; return; }
-        var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2 + magPad);
-        var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2 + magPad);
-        magLabel.style.transform = "translate(" + Math.max(-6, Math.min(6, dx * 8)).toFixed(2) + "px," + Math.max(-6, Math.min(6, dy * 8)).toFixed(2) + "px)";
-      }, { passive: true });
-      heroSec.addEventListener("mouseleave", function () { magLabel.style.transform = ""; });
-    }
-  }
 
   /* курсор-метка */
   var gal = document.querySelector(".gal");
@@ -1038,7 +1022,7 @@ section[id]{scroll-margin-top:84px}
             '<span class="chip">30</span><span class="chip">60</span><span class="chip">90</span>' +
             '<span class="chips__u">мин</span>' +
           "</div>" +
-          '<a class="price__arrow" href="#booking" aria-label="Записаться: ' + p.name + '">→</a>' +
+          '<a class="link-cta" href="#booking" aria-label="Записаться: ' + p.name + '">Записаться <span aria-hidden="true">→</span></a>' +
         "</article>";
       });
     });
