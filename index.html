@@ -149,28 +149,55 @@ section[id]{scroll-margin-top:84px}
 }
 
 /* hero */
-.hero{padding-top:clamp(28px,4.4vw,56px)}
-.hero__eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.hero h1{
-  font-size:clamp(38px,6.6vw,92px);line-height:.95;letter-spacing:-.025em;
-  margin:20px 0 0;text-wrap:pretty;
+.hero{
+  min-height:min(88vh,900px);
+  min-height:min(88svh,900px);
+  display:grid;grid-template-rows:1fr auto;align-items:start;
+  padding-top:clamp(28px,4vw,52px);
 }
-.hero__row{display:grid;grid-template-columns:5fr 7fr;gap:var(--gap);margin-top:clamp(28px,4vw,48px);align-items:start}
-.hero__lead{font-size:19px;line-height:1.55;max-width:38ch;color:#2B2521}
-.hero__cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px}
-.hero__note{font-size:13px;line-height:1.5;color:var(--muted);margin-top:16px}
-.hero__fig{margin:0}
-.hero__fig img{width:100%;height:clamp(360px,60vh,620px);object-fit:cover;object-position:50% 55%}
-.hero__cap{display:flex;justify-content:space-between;gap:16px;font-size:13px;line-height:1.5;color:var(--muted);margin-top:10px}
-.hero__facts{border-top:1px solid var(--line);margin-top:clamp(36px,5vw,64px)}
-.hero__facts .wrap{display:flex;gap:16px 44px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px;font-size:14px;line-height:1.5;color:var(--muted)}
-.hero__facts span{display:inline-flex;align-items:center;gap:10px}
-.hero__facts span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--terra);flex:none}
-@media (max-width:900px){
-  .hero__row{grid-template-columns:1fr;gap:28px}
-  .hero__lead{max-width:46ch}
-  .hero__fig img{height:clamp(260px,56vw,420px)}
-  .hero__cap{flex-direction:column;gap:4px}
+.hero__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:stretch;width:100%}
+.hero__text{grid-column:1/8;align-self:start;display:flex;flex-direction:column;align-items:flex-start}
+.hero__eyebrow{font-size:13px;line-height:1.4;letter-spacing:.16em;text-transform:uppercase;color:#6B6257;margin-bottom:24px}
+.hero h1{
+  font-size:clamp(48px,6vw,88px);line-height:.96;letter-spacing:-.02em;
+  margin:0;text-wrap:pretty;
+}
+.hero__lead{font-size:18px;line-height:1.55;max-width:34ch;color:#5F574D;margin-top:28px;text-wrap:pretty}
+.hero__cta{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:32px}
+.hero__cta .btn{height:52px;padding:0 28px;font-size:14px;font-weight:500;border-radius:2px;box-shadow:none}
+.hero__cta .btn:hover{background:#7C3F27;border-color:#7C3F27}
+.hero__tel{
+  display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1;color:var(--ink);
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;
+}
+.hero__tel:hover{color:var(--terra)}
+.hero__note{font-size:13px;line-height:1.5;color:#6B6257;margin-top:16px}
+.hero__fig{grid-column:8/13;position:relative;margin:0;min-height:0;box-shadow:24px 24px 0 0 #EDE6DA}
+.hero__fig img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%;
+  filter:grayscale(1) sepia(.18) contrast(1.06) brightness(1.02);
+}
+.hero__facts{border-top:1px solid #E2DCD2;padding:20px 0;margin-top:auto}
+.hero__facts .wrap{display:flex;align-items:center;flex-wrap:wrap;font-size:12px;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#6B6257}
+.hero__facts span{display:inline-flex;align-items:center}
+.hero__facts span + span{margin-left:14px}
+.hero__facts span + span::before{content:"";width:3px;height:3px;margin-right:14px;border-radius:50%;background:#2E3A33;flex:none}
+@media (max-width:1023px){
+  .hero{min-height:0;display:block;padding-top:36px}
+  .hero__grid{display:block}
+  .hero__text{display:block}
+  .hero h1{font-size:clamp(40px,9vw,56px)}
+  .hero__lead{max-width:44ch}
+  .hero__cta{display:block;margin-top:28px}
+  .hero__cta .btn{width:100%}
+  .hero__tel{margin-top:14px}
+  .hero__fig{aspect-ratio:3/2;margin:32px calc(var(--pad) * -1) 0;box-shadow:none}
+  .hero__facts{margin-top:0;padding:18px 0}
+  .hero__facts .wrap{display:block;font-size:13px;line-height:1.6;letter-spacing:0;text-transform:none}
+  .hero__facts span{display:block}
+  .hero__facts span + span{margin-left:0}
+  .hero__facts span + span::before{display:none}
+  .hero__facts span:nth-child(3){display:none}
 }
 
 /* master */
@@ -395,32 +422,30 @@ section[id]{scroll-margin-top:84px}
 
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
-      <p class="hero__eyebrow">Студия массажа · Владивосток</p>
-      <h1 id="hero-title">Массаж, после которого тело выдыхает</h1>
-      <div class="hero__row">
-        <div>
-          <p class="hero__lead">Кирова, 25а. Принимаю по одному гостю за раз — в тишине и без спешки.</p>
-          <div class="hero__cta">
-            <a class="btn" href="#booking">Записаться</a>
-            <a class="btn btn--ghost" href="tel:+79243310950">Позвонить</a>
-          </div>
-          <p class="hero__note">Отвечу в течение дня.</p>
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <p class="hero__eyebrow">Студия массажа · Владивосток</p>
+        <h1 id="hero-title">Массаж, после которого тело выдыхает</h1>
+        <p class="hero__lead">Кирова, 25а. Один гость за раз: час тишины и работа с вашим телом. Ежедневно 10:00–20:00, по записи.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#booking">Записаться</a>
+          <a class="hero__tel" href="tel:+79243310950">Позвонить →</a>
         </div>
-        <figure class="hero__fig">
-          <picture>
-            <source srcset="img/hero-room.webp" type="image/webp">
-            <img src="img/hero-room.jpg" width="1440" height="960" alt="Диван, столик с розами и кресло в зоне отдыха кабинета" fetchpriority="high">
-          </picture>
-          <figcaption class="hero__cap"><span>Кирова, 25а · цокольный этаж</span><span>Только по записи</span></figcaption>
-        </figure>
+        <p class="hero__note">Отвечу в течение дня.</p>
       </div>
+      <figure class="hero__fig">
+        <picture>
+          <source srcset="img/hero-room.webp" type="image/webp">
+          <img src="img/hero-room.jpg" width="1440" height="960" alt="Диван и столик с розами в зоне отдыха кабинета" fetchpriority="high">
+        </picture>
+      </figure>
+      <!-- TODO: переснять hero: кушетка, лён, тёплый свет, 3:2, 2400×1600 -->
     </div>
     <div class="hero__facts">
       <div class="wrap">
-        <span>Владивосток, ул. Кирова, 25а</span>
-        <span>Ежедневно 10:00–20:00</span>
-        <span>Один гость за раз</span>
+        <span>Кирова, 25а · цокольный этаж</span>
+        <span>ежедневно 10:00–20:00</span>
+        <span>только по записи</span>
       </div>
     </div>
   </section>
