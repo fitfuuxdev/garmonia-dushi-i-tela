@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://garmonia-dushi-i-tela.ru/sitemap.xml
+Sitemap: https://fitfuuxdev.github.io/garmonia-dushi-i-tela/sitemap.xml
