@@ -202,18 +202,44 @@ section[id]{scroll-margin-top:84px}
 }
 
 /* master */
-.master{display:grid;grid-template-columns:5fr 6fr;gap:clamp(24px,4vw,56px);align-items:start}
-.master__panel{border-top:1px solid var(--ink);padding-top:22px}
-.master__big{font-family:"Prata",Georgia,serif;font-size:clamp(24px,2.7vw,32px);line-height:1.2;letter-spacing:-.01em}
-.master__small{font-size:14px;line-height:1.55;color:var(--muted);margin-top:16px;max-width:30ch}
-.master h2{font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-.02em}
-.master__role{font-size:14px;color:var(--muted);margin-top:8px}
-.master__lead{font-family:"Prata",Georgia,serif;font-size:clamp(20px,2.2vw,26px);line-height:1.35;letter-spacing:-.01em;margin-top:24px}
-.master__body p{font-size:17px;line-height:1.65;margin-top:16px;color:#2B2521}
-.master__note{font-size:15px;line-height:1.6;color:var(--muted);margin-top:24px;border-top:1px solid var(--line);padding-top:18px}
-@media (max-width:900px){
-  .master{grid-template-columns:1fr;gap:28px}
-  .master__panel{order:2}
+#master{padding:clamp(72px,9vw,128px) 0}
+.master{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:stretch}
+.master__fig{grid-column:1/6;margin:0;align-self:start}
+.master__img,.master__ph{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;box-shadow:24px 24px 0 0 #EDE6DA}
+.master__img{filter:grayscale(1) sepia(.18) contrast(1.06) brightness(1.02)}
+.master__ph{background:#EDE6DA}
+.master__cap{margin:24px 0 0;font-size:13px;line-height:1.5;color:#6B6257}
+.master__body{grid-column:7/13;display:flex;flex-direction:column;align-items:flex-start}
+.master__role{margin:0;font-size:12px;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#6B6257}
+.master__title{margin:12px 0 0;font-size:clamp(36px,3.6vw,48px);line-height:1.05;letter-spacing:-.02em}
+.master__p{margin:24px 0 0;font-size:17px;line-height:1.7;color:#3C342B}
+.master__p--2{margin-top:16px}
+.master__facts{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;margin:24px 0 0;font-size:13px;line-height:1.5;color:#6B6257}
+.master__fact{display:inline-flex;align-items:baseline;gap:6px}
+.master__fact b{font-family:"Prata",Georgia,serif;font-weight:400;font-size:20px;line-height:1;color:var(--ink)}
+.master__dot{width:3px;height:3px;border-radius:50%;background:var(--terra);align-self:center;flex:none}
+.master__quote{margin:24px 0 0;padding:0 0 0 20px;border-left:2px solid var(--terra);font-family:"Prata",Georgia,serif;font-style:italic;font-size:22px;line-height:1.4;color:#2B2521;max-width:32ch}
+.master__docs{display:flex;gap:12px;margin-top:24px}
+.master__docs img{width:88px;height:88px;object-fit:cover;border:1px solid var(--line)}
+.master__link{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:auto;padding-top:24px;font-size:14px;line-height:1.5;color:var(--terra);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.master__link span{transition:transform .2s var(--expo)}
+.master__link:hover span{transform:translateX(4px)}
+@media (max-width:1023px){
+  #master{padding:clamp(64px,8vw,80px) 0}
+  .master{display:flex;flex-direction:column;gap:0}
+  .master__body{display:contents}
+  .master__title{order:1;margin-top:0;font-size:clamp(32px,8vw,40px)}
+  .master__role{order:2;margin-top:12px}
+  .master__fig{order:3;align-self:stretch;margin:24px calc(var(--pad) * -1) 0}
+  .master__img,.master__ph{box-shadow:none}
+  .master__cap{margin-top:16px;padding:0 var(--pad)}
+  .master__p{order:4;margin-top:24px}
+  .master__p--2{order:5;margin-top:16px}
+  .master__facts{order:6;flex-direction:column;gap:8px;margin-top:24px}
+  .master__dot{display:none}
+  .master__quote{order:7}
+  .master__docs{order:8}
+  .master__link{order:9;align-self:flex-start;margin-top:24px;padding-top:0}
 }
 
 /* services */
@@ -549,18 +575,37 @@ section[id]{scroll-margin-top:84px}
 
   <section class="sec" id="master" aria-labelledby="master-title">
     <div class="wrap master">
-      <div class="master__panel">
-        <p class="master__big">Один гость за раз. Никакой очереди в коридоре.</p>
-        <p class="master__small">Так устроена запись — и весь сеанс: вы, тёплый свет и тишина.</p>
-      </div>
+      <figure class="master__fig">
+        <div class="master__ph" aria-hidden="true"></div>
+        <!-- TODO: портрет мастера, 4:5, 1200×1500 -->
+        <!-- Когда портрет будет готов, заменить заглушку:
+             <img class="master__img" src="img/master-portrait.jpg" width="1200" height="1500" alt="Мастер в кабинете студии">
+        -->
+        <figcaption class="master__cap">Один гость за раз.<br>Пока идёт сеанс, в студии больше никого нет.</figcaption>
+      </figure>
       <div class="master__body">
-        <h2 id="master-title">Мастер</h2>
-        <p class="master__role">Частная практика · Владивосток</p>
-        <p class="master__lead">Работаю одна и принимаю по одному гостю за раз. Пока идёт сеанс, в студии больше никого нет.</p>
-        <p>Перед сеансом — пять минут разговора: где тянет, где болит, чего хочется телу. От этого зависит, как я буду работать: мягче, глубже или вообще без тревожной зоны.</p>
-        <p>После — покажу пару простых движений, которые можно делать дома. И скажу честно, если массаж сейчас не лучшая идея.</p>
-        <p class="master__note">Дипломы и сертификаты — в кабинете. Покажу перед сеансом.</p>
-        <!-- уточнить у владельца: имя, стаж и подтверждённые сертификаты; портрет 4:5 после съёмки -->
+        <p class="master__role">массажист · частная практика · Владивосток</p>
+        <h2 class="master__title" id="master-title">Мастер</h2>
+        <!-- TODO: имя мастера -->
+        <p class="master__p">Работаю одна: сеанс идёт без спешки, в тишине и без лишних разговоров.</p>
+        <p class="master__p master__p--2">Перед сеансом — пять минут разговора: где тянет, где болит, чего хочется телу. После — покажу пару простых движений на дом. И скажу честно, если массаж сейчас не лучшая идея.</p>
+        <!-- TODO: три факта о мастере (реальные данные): «__ лет практики · __ образование · __ сертификата».
+             Пока данных нет — блок не выводится. Готовая разметка:
+             <div class="master__facts">
+               <span class="master__fact"><b>__</b> лет практики</span>
+               <span class="master__dot" aria-hidden="true"></span>
+               <span class="master__fact"><b>__</b> образование</span>
+               <span class="master__dot" aria-hidden="true"></span>
+               <span class="master__fact"><b>__</b> сертификата</span>
+             </div>
+        -->
+        <!-- TODO: цитата мастера — только текст от владельца, 1–2 строки.
+             <blockquote class="master__quote">…</blockquote>
+        -->
+        <!-- TODO: при наличии сканов — 3 миниатюры документов 88×88 с рамкой #E2DCD2 и alt.
+             <div class="master__docs">…</div>
+        -->
+        <a class="master__link" href="#booking">Записаться на сеанс <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -1182,7 +1227,7 @@ section[id]{scroll-margin-top:84px}
 
   /* появление секций */
   var sections = [].slice.call(document.querySelectorAll("main > section")).filter(function (s) { return !s.classList.contains("hero"); });
-  var revealSel = ".sec-head p,.master__panel,.master__body,.price__group,.price__row,.price__note,.price__cta,.step,.band,.shot,.gal__cap,.find__addr,.find__map,.faq details,.book__info,.form,.strip__in > *";
+  var revealSel = ".sec-head p,.master__fig,.master__body,.price__group,.price__row,.price__note,.price__cta,.step,.band,.shot,.gal__cap,.find__addr,.find__map,.faq details,.book__info,.form,.strip__in > *";
   sections.forEach(function (sec) {
     [].slice.call(sec.querySelectorAll("h2")).forEach(function (h) {
       if (h.querySelector(".line")) return;
