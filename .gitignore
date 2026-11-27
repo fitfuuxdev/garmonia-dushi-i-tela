@@ -1,3 +1,5 @@
-.office-verify/
+﻿.office-verify/
+build/
+tmp/
 Thumbs.db
 desktop.ini
