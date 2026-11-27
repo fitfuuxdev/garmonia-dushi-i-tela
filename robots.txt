@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://garmonia-dushi-i-tela.ru/sitemap.xml
